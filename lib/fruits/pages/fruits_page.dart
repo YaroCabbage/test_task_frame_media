@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_task_frame_media/fruits/models/fruits_model.dart';
 import 'package:test_task_frame_media/fruits/providers/fruits_provider.dart';
+import 'package:test_task_frame_media/fruits/utils/open_fruit_page_util.dart';
 import 'package:test_task_frame_media/fruits/widgets/fruit_widget.dart';
 import 'package:test_task_frame_media/widgets/default_error_widget.dart';
 
@@ -44,7 +45,12 @@ class FruitsPage extends ConsumerWidget {
 
   Widget buildFruitCard(List<Fruit> fruits, int index) {
     final fruit = fruits[index];
-    return FruitWidget(fruit: fruit);
+    return Builder(builder: (context) {
+      return FruitWidget(
+        fruit: fruit,
+        onTap: () => openFruitPage(context, fruit),
+      );
+    });
   }
 
   Widget buildFruitsLoader(AsyncLoading<List<Fruit>> loading) {
